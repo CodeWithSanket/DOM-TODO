@@ -37,6 +37,18 @@ const displayTodoToHTML = (todoInputVal, taskList) => {
     taskList.appendChild(eachListItem);
 }
 
+
+const loadingTodos = () => {
+    const todoArray = loadTodos();
+    const taskList = document.getElementById('taskList');
+    if (todoArray != '[]') {
+        const todoArrayParsed = JSON.parse(todoArray);
+        todoArrayParsed.forEach((todo) => {
+            displayTodoToHTML(todo, taskList);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const todoInput = document.getElementById('todoInput');
     let todoInputVal = '';
@@ -50,5 +62,5 @@ document.addEventListener('DOMContentLoaded', () => {
         addTodoValueToLocalStorage(todoInputVal);
         todoInput.value = '';
     });
-    
+    loadingTodos();
 });
